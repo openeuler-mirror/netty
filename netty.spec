@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:             netty
 Version:          4.1.13
 Release:          7
@@ -77,6 +79,7 @@ Man pages and other related documents for %{name}.
 %pom_remove_plugin -r :forbiddenapis
 
 cp %{SOURCE1} common/codegen.bash
+chmod a+x common/codegen.bash
 %pom_add_plugin org.codehaus.mojo:exec-maven-plugin common '
 <executions>
     <execution>
