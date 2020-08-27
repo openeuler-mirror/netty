@@ -2,7 +2,7 @@
 
 Name:             netty
 Version:          4.1.13
-Release:          7
+Release:          8
 Summary:          Asynchronous event-driven network application Java framework
 License:          ASL 2.0
 URL:              https://netty.io/
@@ -11,7 +11,6 @@ Source1:          codegen.bash
 Patch0000:        0001-Remove-OpenSSL-parts-depending-on-tcnative.patch
 Patch0001:        0002-Remove-NPN.patch
 Patch0002:        0003-Remove-conscrypt-ALPN.patch
-
 BuildRequires:    maven-local mvn(ant-contrib:ant-contrib)
 BuildRequires:    mvn(com.jcraft:jzlib) mvn(commons-logging:commons-logging)
 BuildRequires:    mvn(kr.motd.maven:os-maven-plugin) mvn(log4j:log4j:1.2.17)
@@ -22,7 +21,6 @@ BuildRequires:    mvn(org.fusesource.hawtjni:maven-hawtjni-plugin) mvn(org.javas
 BuildRequires:    mvn(org.jctools:jctools-core) mvn(org.slf4j:slf4j-api)
 BuildRequires:    mvn(org.sonatype.oss:oss-parent:pom:)
 BuildRequires:    mvn(com.fasterxml:aalto-xml) mvn(com.github.jponge:lzma-java)
-BuildRequires:    mvn(com.google.protobuf.nano:protobuf-javanano) mvn(com.google.protobuf:protobuf-java)
 BuildRequires:    mvn(com.ning:compress-lzf) mvn(net.jpountz.lz4:lz4)
 BuildRequires:    mvn(org.apache.logging.log4j:log4j-api) mvn(org.bouncycastle:bcpkix-jdk15on)
 BuildRequires:    mvn(org.jboss.marshalling:jboss-marshalling) mvn(org.eclipse.jetty.alpn:alpn-api)
@@ -95,6 +93,11 @@ chmod a+x common/codegen.bash
 </executions>
 '
 %pom_remove_plugin :groovy-maven-plugin common
+%pom_remove_dep -r "com.google.protobuf:protobuf-java"
+%pom_remove_dep -r "com.google.protobuf.nano:protobuf-javanano"
+rm codec/src/main/java/io/netty/handler/codec/protobuf/*
+sed -i '/import.*protobuf/d' codec/src/main/java/io/netty/handler/codec/DatagramPacket*.java
+
 sed -i 's|taskdef|taskdef classpathref="maven.plugin.classpath"|' all/pom.xml
 
 %pom_xpath_inject "pom:plugins/pom:plugin[pom:artifactId = 'maven-antrun-plugin']" '<dependencies><dependency><groupId>ant-contrib</groupId><artifactId>ant-contrib</artifactId><version>1.0b3</version></dependency></dependencies>' all/pom.xml
@@ -124,5 +127,8 @@ export CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %changelog
+* Wed Aug 26 2020 yaokai <yaokai13@huawei.com> - 4.1.13-8
+ - Disable support for protobuf in the codecs module
+
 * Mon Dec 23 2019 Shuaishuai Song <songshuaishuai2@huawei.com> - 4.1.13-7
 - package init
