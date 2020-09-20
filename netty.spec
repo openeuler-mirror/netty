@@ -2,7 +2,7 @@
 
 Name:             netty
 Version:          4.1.13
-Release:          8
+Release:          9
 Summary:          Asynchronous event-driven network application Java framework
 License:          ASL 2.0
 URL:              https://netty.io/
@@ -11,6 +11,12 @@ Source1:          codegen.bash
 Patch0000:        0001-Remove-OpenSSL-parts-depending-on-tcnative.patch
 Patch0001:        0002-Remove-NPN.patch
 Patch0002:        0003-Remove-conscrypt-ALPN.patch
+Patch0003:        CVE-2019-16869.patch
+Patch0004:        CVE-2019-20444.patch
+Patch0005:        CVE-2019-20445-1.patch
+Patch0006:        CVE-2019-20445-2.patch
+Patch0007:        CVE-2019-20445-3.patch
+Patch0008:        CVE-2020-11612.patch
 BuildRequires:    maven-local mvn(ant-contrib:ant-contrib)
 BuildRequires:    mvn(com.jcraft:jzlib) mvn(commons-logging:commons-logging)
 BuildRequires:    mvn(kr.motd.maven:os-maven-plugin) mvn(log4j:log4j:1.2.17)
@@ -127,6 +133,9 @@ export CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %changelog
+ Sun 20 Sep 2020 wangyue <wangyue92@huawei.com> - 4.1.13-9
+- fix CVE-2019-16869 CVE-2019-20444 CVE-2019-20445 CVE-2020-11612
+ 
 * Wed Aug 26 2020 yaokai <yaokai13@huawei.com> - 4.1.13-8
  - Disable support for protobuf in the codecs module
 
