@@ -2,7 +2,7 @@
 
 Name:             netty
 Version:          4.1.13
-Release:          9
+Release:          10
 Summary:          Asynchronous event-driven network application Java framework
 License:          ASL 2.0
 URL:              https://netty.io/
@@ -26,7 +26,7 @@ BuildRequires:    mvn(org.codehaus.mojo:build-helper-maven-plugin) mvn(org.codeh
 BuildRequires:    mvn(org.fusesource.hawtjni:maven-hawtjni-plugin) mvn(org.javassist:javassist)
 BuildRequires:    mvn(org.jctools:jctools-core) mvn(org.slf4j:slf4j-api)
 BuildRequires:    mvn(org.sonatype.oss:oss-parent:pom:)
-BuildRequires:    mvn(com.fasterxml:aalto-xml) mvn(com.github.jponge:lzma-java)
+BuildRequires:    mvn(com.fasterxml:aalto-xml)
 BuildRequires:    mvn(com.ning:compress-lzf) mvn(net.jpountz.lz4:lz4)
 BuildRequires:    mvn(org.apache.logging.log4j:log4j-api) mvn(org.bouncycastle:bcpkix-jdk15on)
 BuildRequires:    mvn(org.jboss.marshalling:jboss-marshalling) mvn(org.eclipse.jetty.alpn:alpn-api)
@@ -115,6 +115,10 @@ sed -i 's|taskdef|taskdef classpathref="maven.plugin.classpath"|' all/pom.xml
 
 %mvn_package ':*-tests' __noinstall
 
+# remove the BuildRequires lzma-java that is deprecated
+%pom_remove_dep -r "com.github.jponge:lzma-java"
+rm -f codec/src/main/java/io/netty/handler/codec/compression/LzmaFrameEncoder.java
+rm -f codec/src/test/java/io/netty/handler/codec/compression/LzmaFrameEncoderTest.java
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
@@ -133,6 +137,9 @@ export CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %changelog
+* Thu Jan 28 2021 maminjie <maminjie1@huawei.com> - 4.1.13-10
+- remove the BuildRequires lzma-java that is deprecated
+
 * Fri Dec 04 2020 caodongxia <caodongxia@huawei.com> - 4.1.13-9
 - fix CVE-2019-16869 CVE-2019-20444 CVE-2019-20445 CVE-2020-11612
  
