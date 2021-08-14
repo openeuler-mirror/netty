@@ -2,7 +2,7 @@
 
 Name:             netty
 Version:          4.1.13
-Release:          12
+Release:          13
 Summary:          Asynchronous event-driven network application Java framework
 License:          ASL 2.0
 URL:              https://netty.io/
@@ -66,6 +66,11 @@ Man pages and other related documents for %{name}.
 %pom_disable_module "testsuite-osgi"
 %pom_disable_module "tarball"
 %pom_disable_module "microbench"
+%pom_disable_module transport-native-unix-common
+%pom_disable_module transport-native-unix-common-tests
+%pom_disable_module transport-native-epoll
+%pom_disable_module transport-native-kqueue
+%pom_disable_module all
 
 %pom_xpath_inject 'pom:plugin[pom:artifactId="maven-remote-resources-plugin"]' '
 <dependencies>
@@ -145,6 +150,9 @@ export CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %changelog
+* Sat Aug 14 2021 wangyue <wangyue92@qq.com> - 4.1.13-13
+- fix build error
+
 * Tue Apr 06 2021 wangxiao <wangxiao65@huawei.com> - 4.1.13-12
 - Fix CVE-2021-21295 CVE-2021-21409
 
