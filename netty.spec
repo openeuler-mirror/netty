@@ -2,7 +2,7 @@
 
 Name:             netty
 Version:          4.1.13
-Release:          12
+Release:          13
 Summary:          Asynchronous event-driven network application Java framework
 License:          ASL 2.0
 URL:              https://netty.io/
@@ -24,6 +24,7 @@ Patch0012:        CVE-2021-21295-pre3.patch
 Patch0013:        CVE-2021-21295-pre4.patch
 Patch0014:        CVE-2021-21295.patch
 Patch0015:        CVE-2021-21409.patch
+Patch0016:        fix-build-error.patch
 
 BuildRequires:    maven-local mvn(ant-contrib:ant-contrib)
 BuildRequires:    mvn(com.jcraft:jzlib) mvn(commons-logging:commons-logging)
@@ -145,6 +146,9 @@ export CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %changelog
+* Mon Aug 16 2021 wangyue <wangyue92@qq.com> - 4.1.13-13
+- fix build error
+
 * Tue Apr 06 2021 wangxiao <wangxiao65@huawei.com> - 4.1.13-12
 - Fix CVE-2021-21295 CVE-2021-21409
 
