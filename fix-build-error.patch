@@ -1,0 +1,52 @@
+From c4659b32ae737903c7e5a28c1a2fd706f43e6640 Mon Sep 17 00:00:00 2001
+From: wang_yue111 <648774160@qq.com>
+Date: Mon, 16 Aug 2021 11:15:47 +0800
+Subject: [PATCH] fix build error
+
+---
+ transport-native-unix-common/pom.xml | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/transport-native-unix-common/pom.xml b/transport-native-unix-common/pom.xml
+index 72f02c0..04430e9 100644
+--- a/transport-native-unix-common/pom.xml
++++ b/transport-native-unix-common/pom.xml
+@@ -99,7 +99,7 @@
+                       <env key="LIB_DIR" value="${nativeLibOnlyDir}" />
+                       <env key="OBJ_DIR" value="${nativeObjsOnlyDir}" />
+                       <env key="JNI_PLATFORM" value="${jni.platform}" />
+-                      <env key="CFLAGS" value="-O3 -Werror -Wno-attributes -fPIC -fno-omit-frame-pointer -Wunused-variable" />
++                      <env key="CFLAGS" value="-O3 -Werror -Wno-error=stringop-overflow -Wno-attributes -fPIC -fno-omit-frame-pointer -Wunused-variable" />
+                       <env key="LDFLAGS" value="-Wl,--no-as-needed -lrt" />
+                       <env key="LIB_NAME" value="${nativeLibName}" />
+                       <!-- support for __attribute__((weak_import)) by the linker was added in 10.2 so ensure we
+@@ -170,7 +170,7 @@
+                       <env key="LIB_DIR" value="${nativeLibOnlyDir}" />
+                       <env key="OBJ_DIR" value="${nativeObjsOnlyDir}" />
+                       <env key="JNI_PLATFORM" value="${jni.platform}" />
+-                      <env key="CFLAGS" value="-O3 -Werror -Wno-attributes -fPIC -fno-omit-frame-pointer -Wunused-variable" />
++                      <env key="CFLAGS" value="-O3 -Werror -Wno-error=stringop-overflow -Wno-attributes -fPIC -fno-omit-frame-pointer -Wunused-variable" />
+                       <env key="LDFLAGS" value="-Wl,--no-as-needed -lrt" />
+                       <env key="LIB_NAME" value="${nativeLibName}" />
+                     </exec>
+@@ -240,7 +240,7 @@
+                       <env key="LIB_DIR" value="${nativeLibOnlyDir}" />
+                       <env key="OBJ_DIR" value="${nativeObjsOnlyDir}" />
+                       <env key="JNI_PLATFORM" value="${jni.platform}" />
+-                      <env key="CFLAGS" value="-O3 -Werror -Wno-attributes -fPIC -fno-omit-frame-pointer -Wunused-variable" />
++                      <env key="CFLAGS" value="-O3 -Werror -Wno-error=stringop-overflow -Wno-attributes -fPIC -fno-omit-frame-pointer -Wunused-variable" />
+                       <env key="LDFLAGS" value="-Wl,--no-as-needed -lrt" />
+                       <env key="LIB_NAME" value="${nativeLibName}" />
+                     </exec>
+@@ -310,7 +310,7 @@
+                       <env key="LIB_DIR" value="${nativeLibOnlyDir}" />
+                       <env key="OBJ_DIR" value="${nativeObjsOnlyDir}" />
+                       <env key="JNI_PLATFORM" value="${jni.platform}" />
+-                      <env key="CFLAGS" value="-O3 -Werror -Wno-attributes -fPIC -fno-omit-frame-pointer -Wunused-variable" />
++                      <env key="CFLAGS" value="-O3 -Werror -Wno-error=stringop-overflow -Wno-attributes -fPIC -fno-omit-frame-pointer -Wunused-variable" />
+                       <env key="LDFLAGS" value="-Wl,--no-as-needed -lrt" />
+                       <env key="LIB_NAME" value="${nativeLibName}" />
+                     </exec>
+-- 
+2.23.0
+
