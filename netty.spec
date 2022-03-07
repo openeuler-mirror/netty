@@ -2,7 +2,7 @@
 
 Name:             netty
 Version:          4.1.13
-Release:          17
+Release:          18
 Summary:          Asynchronous event-driven network application Java framework
 License:          ASL 2.0
 URL:              https://netty.io/
@@ -40,7 +40,7 @@ BuildRequires:    mvn(org.fusesource.hawtjni:maven-hawtjni-plugin) mvn(org.javas
 BuildRequires:    mvn(org.jctools:jctools-core) mvn(org.slf4j:slf4j-api)
 BuildRequires:    mvn(org.sonatype.oss:oss-parent:pom:)
 BuildRequires:    mvn(com.fasterxml:aalto-xml)
-BuildRequires:    mvn(com.ning:compress-lzf) mvn(net.jpountz.lz4:lz4)
+BuildRequires:    mvn(com.ning:compress-lzf)
 BuildRequires:    mvn(org.apache.logging.log4j:log4j-api) mvn(org.bouncycastle:bcpkix-jdk15on)
 BuildRequires:    mvn(org.jboss.marshalling:jboss-marshalling) mvn(org.eclipse.jetty.alpn:alpn-api)
 
@@ -133,6 +133,9 @@ sed -i 's|taskdef|taskdef classpathref="maven.plugin.classpath"|' all/pom.xml
 rm -f codec/src/main/java/io/netty/handler/codec/compression/LzmaFrameEncoder.java
 rm -f codec/src/test/java/io/netty/handler/codec/compression/LzmaFrameEncoderTest.java
 
+%pom_remove_dep -r net.jpountz.lz4:lz4
+rm -f codec/src/*/java/io/netty/handler/codec/compression/Lz4*.java
+
 %build
 export CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 %mvn_build -f
@@ -150,6 +153,9 @@ export CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %changelog
+* Mon Mar 07 2022 wangkai <wangkai385@huawei.com> - 4.1.13-18
+- Remove lz4-java dependency
+
 * Fri Dec 24 2021 wangkai <wangkai385@huawei.com> - 4.1.13-17
 - This package depends on log4j.After the log4j vulnerability CVE-2021-45105 is fixed,the version needs to be rebuild.
 
