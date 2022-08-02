@@ -2,7 +2,7 @@
 
 Name:             netty
 Version:          4.1.13
-Release:          15
+Release:          18
 Summary:          Asynchronous event-driven network application Java framework
 License:          ASL 2.0
 URL:              https://netty.io/
@@ -153,13 +153,22 @@ export CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %changelog
-* Fri Apr 22 2022 wangkai <wangkai385@h-partners.com> - 4.1.13-15
-- Remove lz4-java dependency and fix CVE-2021-43797
+* Mon Mar 07 2022 wangkai <wangkai385@huawei.com> - 4.1.13-18
+- Remove lz4-java dependency
 
-* Wed Oct 27 2021 wangkai <wangkai385@huawei.com> - 4.1.13-14
+* Fri Dec 24 2021 wangkai <wangkai385@huawei.com> - 4.1.13-17
+- This package depends on log4j.After the log4j vulnerability CVE-2021-45105 is fixed,the version needs to be rebuild.
+
+* Fri Dec 17 2021 yaoxin <yaoxin30@huawei.com> - 4.1.13-16
+- Fix CVE-2021-43797
+
+* Wed Oct 27 2021 wangkai <wangkai385@huawei.com> - 4.1.13-15
 - fix CVE-2021-37136 CVE-2021-37137
 
-* Mon Aug 16 2021 wangyue <wangyue92@qq.com> - 4.1.13-13
+* Mon Aug 16 2021 wangyue <wangyue92@qq.com> - 4.1.13-14
+- fix build error
+
+* Sat Aug 14 2021 wangyue <wangyue92@qq.com> - 4.1.13-13
 - fix build error
 
 * Tue Apr 06 2021 wangxiao <wangxiao65@huawei.com> - 4.1.13-12
