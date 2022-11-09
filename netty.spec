@@ -2,7 +2,7 @@
 
 Name:             netty
 Version:          4.1.13
-Release:          18
+Release:          19
 Summary:          Asynchronous event-driven network application Java framework
 License:          ASL 2.0
 URL:              https://netty.io/
@@ -153,6 +153,9 @@ export CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %changelog
+* Wed Nov 9 2022 liyanan <liyanan32@h-partners.com>  - 4.1.13-19
+- Change source
+
 * Mon Mar 07 2022 wangkai <wangkai385@huawei.com> - 4.1.13-18
 - Remove lz4-java dependency
 
