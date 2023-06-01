@@ -2,7 +2,7 @@
 
 Name:             netty
 Version:          4.1.13
-Release:          19
+Release:          20
 Summary:          Asynchronous event-driven network application Java framework
 License:          ASL 2.0
 URL:              https://netty.io/
@@ -24,13 +24,18 @@ Patch0012:        CVE-2021-21295-pre3.patch
 Patch0013:        CVE-2021-21295-pre4.patch
 Patch0014:        CVE-2021-21295.patch
 Patch0015:        CVE-2021-21409.patch
-Patch0016:        fix-build-error.patch
+#Patch0016:        fix-build-error.patch
 Patch0017:        CVE-2021-37136.patch
 Patch0018:        CVE-2021-37137.patch
 Patch0019:        CVE-2021-43797-pre.patch
 Patch0020:        CVE-2021-43797.patch
+#Patch0021:        fix-strip.patch
+%if "%toolchain" == "clang"
+Patch0022:        fix-clang.patch
+%else
 Patch0021:        fix-strip.patch
-
+Patch0016:        fix-build-error.patch
+%endif
 BuildRequires:    maven-local mvn(ant-contrib:ant-contrib)
 BuildRequires:    mvn(com.jcraft:jzlib) mvn(commons-logging:commons-logging)
 BuildRequires:    mvn(kr.motd.maven:os-maven-plugin) mvn(log4j:log4j:1.2.17)
@@ -154,6 +159,9 @@ export CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %changelog
+* Thur Jun 1 2023 zhangxiang <zhangxiang@iscas.ac.cn> - 4.1.13-20
+- Fix clang build error
+
 * Sun Mar 05 2023 wulei <wulei80@h-partners.com> - 4.1.13-19
 - Add strip
 

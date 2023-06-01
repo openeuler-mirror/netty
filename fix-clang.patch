@@ -1,0 +1,24 @@
+diff -ur netty-netty-4.1.13.Final/transport-native-epoll/src/main/c/netty_epoll_linuxsocket.c netty-netty-4.1.13.Final/transport-native-epoll/src/main/c/netty_epoll_linuxsocket.c
+--- netty-netty-4.1.13.Final/transport-native-epoll/src/main/c/netty_epoll_linuxsocket.c	2017-07-06 11:23:51.000000000 +0000
++++ netty-netty-4.1.13.Final/transport-native-epoll/src/main/c/netty_epoll_linuxsocket.c	2023-05-31 13:23:32.566313659 +0000
+@@ -183,7 +183,7 @@
+      if (netty_unix_socket_getOption(env, fd, IPPROTO_TCP, TCP_INFO, &tcp_info, sizeof(tcp_info)) == -1) {
+          return;
+      }
+-     unsigned int cArray[32];
++     int cArray[32];
+      cArray[0] = tcp_info.tcpi_state;
+      cArray[1] = tcp_info.tcpi_ca_state;
+      cArray[2] = tcp_info.tcpi_retransmits;
+diff -ur netty-netty-4.1.13.Final/transport-native-unix-common/pom.xml netty-netty-4.1.13.Final/transport-native-unix-common/pom.xml
+--- netty-netty-4.1.13.Final/transport-native-unix-common/pom.xml	2017-07-06 11:23:51.000000000 +0000
++++ netty-netty-4.1.13.Final/transport-native-unix-common/pom.xml	2023-05-31 11:01:27.545622740 +0000
+@@ -31,7 +31,7 @@
+ 
+   <properties>
+     <exe.make>make</exe.make>
+-    <exe.compiler>gcc</exe.compiler>
++    <exe.compiler>clang</exe.compiler>
+     <exe.archiver>ar</exe.archiver>
+     <nativeLibName>libnetty-unix-common</nativeLibName>
+     <nativeIncludeDir>${project.basedir}/src/main/c</nativeIncludeDir>
